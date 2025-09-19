@@ -13,7 +13,7 @@ void loop() {
   float windSpeed = (voltage - 0.4) * 20.25;  // Räkna om till m/s
 
   // Se till att inte få negativa värden
-  if (windSpeed < 0.14) windSpeed = 0;
+  if (windSpeed < 0.14) windSpeed = 0.0;
   if (windSpeed > 32.4) windSpeed = last_windspeed;
 
   Serial.println(windSpeed, 1);

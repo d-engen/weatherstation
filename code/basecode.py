@@ -23,14 +23,13 @@ def read_temp_raw():
 
 def read_wind_raw():
     try:
-        k = open("/dev/ttyACM0", "r")
-        ex = k.readline()
-    
+        with open("/dev/ttyACM0", "r") as k:
+            ex = k.readline().strip()     
+            value = float(ex)             
+            rounded_val = round(value, 1) 
     except:
-        ex = "fel"
-    finally:
-        k.close()    
-        return ex
+        rounded_val = "fel"               
+    return rounded_val                     
 
 def read_temp():
     lines = read_temp_raw()
@@ -41,7 +40,8 @@ def read_temp():
     if equals_pos != -1:
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
-        return temp_c
+        rounded_val = round(temp_c, 1)
+        return rounded_val
     
 
 
