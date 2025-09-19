@@ -12,6 +12,7 @@ client.loop_start()
 
 # Skicka ett meddelande till specificerad topic
 result = client.publish("pi10/sensor/1", 70)
+result = client.publish("pi10/sensor/2", 70)
 
 # Vänta tills meddelandet är skickat
 result.wait_for_publish()
