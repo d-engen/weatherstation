@@ -68,9 +68,15 @@ def mqtt_sensor(sens1, sens2):
     client.disconnect()
 
 while True:
+    
+    wind = read_wind_raw()
+    temp = read_temp()
 
+    mqtt_sensor(wind, temp)
 
-    print(f'vindhastighet: {read_wind_raw()}m/s')
+    #time.sleep(10)
 
-    print(f'Rummet är {read_temp()}c')
-    #time.sleep(1)
+    print(f'vindhastighet: {wind}m/s')
+
+    print(f'Rummet är {temp}c')
+    time.sleep(1)
