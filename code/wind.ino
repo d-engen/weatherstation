@@ -1,7 +1,7 @@
 const int sensorPin = A0;   // Anslut vindmätaren till A0
 const float vRef = 3.3;     // Referensspänning (för Arduino Uno är det normalt 5V)
 const int adcMax = 1023;    // 10-bitars ADC (0–1023)
-float last_windspeed = 1.0;
+float last_windspeed = 0.0;
 void setup() {
   Serial.begin(9600);
   analogReference(EXTERNAL); //Använder 3.3 som A
