@@ -24,9 +24,12 @@ def read_temp_raw():
 def read_wind_raw():
     try:
         with open("/dev/ttyACM0", "r") as k:
-            ex = k.readline().strip()     
-            value = float(ex)             
-            rounded_val = round(value, 1) 
+            ex = k.readline().strip() 
+            if ex.find('.'):    
+                value = ex             
+                rounded_val = round(value, 1) 
+            else:
+                rounded_val = -1
     except:
         rounded_val = "fel"               
     return rounded_val                     
@@ -72,11 +75,11 @@ while True:
     wind = read_wind_raw()
     temp = read_temp()
 
-    mqtt_sensor(wind, temp)
+    #mqtt_sensor(wind, temp)
 
     #time.sleep(10)
 
     print(f'vindhastighet: {wind}m/s')
 
     print(f'Rummet är {temp}c')
-    time.sleep(1)
+    time.sleep(0.1)
