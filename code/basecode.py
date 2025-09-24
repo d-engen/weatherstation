@@ -2,6 +2,7 @@ import os
 import glob
 import time
 import paho.mqtt.client as mqtt
+import threading
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -22,17 +23,16 @@ def read_temp_raw():
 
 
 def read_wind_raw():
-    try:
+    while True:
         with open("/dev/ttyACM0", "r") as k:
-            ex = k.readline().strip() 
-            if ex.find('.'):    
-                value = ex             
-                rounded_val = round(value, 1) 
+            line = k.readline().strip()
+        try:
+            if float(line) < 0.4: # lyckas konvertera → returnera värdet direkt
+                return 0.0
             else:
-                rounded_val = -1
-    except:
-        rounded_val = "fel"               
-    return rounded_val                     
+                return float(line)
+        except ValueError:
+            continue             # inte en float → läs om                  
 
 def read_temp():
     lines = read_temp_raw()
@@ -71,11 +71,13 @@ def mqtt_sensor(sens1, sens2):
     client.disconnect()
 
 while True:
+
+
     
     wind = read_wind_raw()
     temp = read_temp()
 
-    #mqtt_sensor(wind, temp)
+    mqtt_sensor(wind, temp)
 
     #time.sleep(10)
 
