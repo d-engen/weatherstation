@@ -47,7 +47,7 @@ def read_wind_raw():
 
 # Tolkar rådata från temperaturfilen och extraherar temperaturvärdet.
 # Kontrollerar att CRC-kontrollen i första raden är godkänd ("YES")
-# Hämtar temperaturvärdet från adnra raden och konverterar till Celsius
+# Hämtar temperaturvärdet från andra raden och konverterar till Celsius
 # Returnerar temperaturvärdet avrundat till en decimal
 
 def read_temp():
