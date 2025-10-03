@@ -16,6 +16,7 @@ device_file = device_folder + '/w1_slave' # Fil där temperaturen läses från
 # Funktion för att läsa rådata från temperatursensorn
 # Öppnar filen för att läsa alla rader. Hanterar eventuella fel vid filöppning
 # Returnerar en lista med rader från filen eller strängen "fel" vid fel
+
 def read_temp_raw():
     """Läser rådata av temperaturen"""
     try:
@@ -67,6 +68,7 @@ def read_temp():
 # Startar en loop för att hålla anslutningen aktiv
 # Publicerar värdet från båda sensorerna (sens1 och sens2) på varsin MQTT-topic
 # Väntar till meddelandena är skickade, stoppar loopen och kopplar från broker
+
 def mqtt_sensor(sens1, sens2):
     # Skapa en MQTT-klient
     client = mqtt.Client()
@@ -89,7 +91,7 @@ def mqtt_sensor(sens1, sens2):
     client.loop_stop()
     client.disconnect()
 
-# Huvudprogram som kör en evig loop
+# Huvudprogram som kör en evig loop 
 
 while True:
 
@@ -101,4 +103,5 @@ while True:
     print(f'vindhastighet: {wind}m/s')
 
     print(f'Rummet är {temp}c')
-    time.sleep(0.1)
+
+    time.sleep(1)
